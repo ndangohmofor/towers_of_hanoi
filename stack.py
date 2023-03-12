@@ -1,7 +1,9 @@
+import string
+
 from node import Node
 
 class Stack:
-    def __init__(self, name):
+    def __init__(self, name: string):
         self.size = 0
         self.top_item = None
         self.limit = 1000

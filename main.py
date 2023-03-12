@@ -1,16 +1,40 @@
-# This is a sample Python script.
+from stack import Stack
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+print("\nLet's play Towers of Hanoi!!")
 
+#Create the Stacks
+stacks = []
+left_stack = Stack('Left')
+right_stack = Stack('Right')
+middle_stack = Stack('Middle')
+stacks.append(left_stack)
+stacks.append(middle_stack)
+stacks.append(right_stack)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+#Set up the Game
+num_disks = int(input("How many disks do you want to play with?\n"))
 
+while num_disks < 3:
+  num_disks = int(input("Enter a number greater than or equal to 3\n"))
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+for disk in range(num_disks, 0, -1):
+  left_stack.push(disk)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+num_optimal_moves = (2**num_disks) - 1
+print("\nThe fastest you can solve this game is in {0} moves".format(num_optimal_moves))
+
+#Get User Input
+def get_input():
+  choices = [name.get_name()[0] for name in stacks]
+  while True:
+    for i in range(len(stacks)):
+      name = stacks[i].get_name()
+      letter = choices[i]
+      print("Enter {0} for {1}".format(letter, name))
+    user_input = (input(""))
+    if user_input in choices:
+      for i in range(len(stacks)):
+        if user_input == choices[i]:
+          return stacks[i]
+
+#Play the Game
